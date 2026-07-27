@@ -1,28 +1,84 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TaggingService } from './tagging.service';
-import { TaggingDto } from './dto/tagging.dto';
+import { Controller, Post, Body, HttpCode } from "@nestjs/common";
+import { TaggingService } from "./tagging.service";
+import { TaggingDto } from "./dto/tagging.dto";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import { TaggingResponseDto } from "./dto/tagging-response.dto";
+import { Throttle } from "@nestjs/throttler";
+import { ConfigService } from "@nestjs/config";
 
-@Controller('tagging')
+@Controller("tagging")
+@ApiTags("Tagging")
 export class TaggingController {
-  constructor(private readonly taggingService: TaggingService) {}
+  constructor(
+    private readonly taggingService: TaggingService,
+    private readonly _configService: ConfigService,
+  ) {}
 
-  @Post('login')
-  login(@Body() taggingDto: TaggingDto | any) {
+  @Post("login")
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: "La solicitud fue procesada",
+    type: TaggingResponseDto,
+  })
+  @ApiResponse({ status: 500, description: "Error al procesar la solicitud" })
+  @ApiResponse({
+    status: 429,
+    description: "ThrottlerException: Too Many Requests",
+  })
+  @Throttle({ login: {} })
+  login(@Body() taggingDto: TaggingDto) {
     return this.taggingService.login(taggingDto);
   }
 
-  @Post('singup')
-  singup(@Body() taggingDto: TaggingDto | any) {
+  @Post("singup")
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: "La solicitud fue procesada",
+    type: TaggingResponseDto,
+  })
+  @ApiResponse({ status: 500, description: "Error al procesar la solicitud" })
+  @ApiResponse({
+    status: 429,
+    description: "ThrottlerException: Too Many Requests",
+  })
+  @Throttle({ singup: {} })
+  singup(@Body() taggingDto: TaggingDto) {
     return this.taggingService.singup(taggingDto);
   }
 
-  @Post('first-deposit')
-  firstDeposit(@Body() taggingDto: TaggingDto | any) {
+  @Post("first-deposit")
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: "La solicitud fue procesada",
+    type: TaggingResponseDto,
+  })
+  @ApiResponse({ status: 500, description: "Error al procesar la solicitud" })
+  @ApiResponse({
+    status: 429,
+    description: "ThrottlerException: Too Many Requests",
+  })
+  @Throttle({ 'first-deposit': {} })
+  firstDeposit(@Body() taggingDto: TaggingDto) {
     return this.taggingService.firstDeposit(taggingDto);
   }
 
-  @Post('deposit')
-  deposit(@Body() taggingDto: TaggingDto | any) {
+  @Post("deposit")
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: "La solicitud fue procesada",
+    type: TaggingResponseDto,
+  })
+  @ApiResponse({ status: 500, description: "Error al procesar la solicitud" })
+  @ApiResponse({
+    status: 429,
+    description: "ThrottlerException: Too Many Requests",
+  })
+  @Throttle({ 'deposit': {} })
+  deposit(@Body() taggingDto: TaggingDto) {
     return this.taggingService.deposit(taggingDto);
   }
 }
