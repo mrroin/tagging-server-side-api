@@ -14,27 +14,27 @@ import { APP_GUARD } from "@nestjs/core";
       useFactory: (config: ConfigService) => [
         {
           // Named configuration 'login'
-          name: 'login',
-          ttl: config.get<number>('throttleLoginTtl', 60000),
-          limit: config.get<number>('throttleLoginLimit', 1000),
+          name: "login",
+          ttl: config.get<number>("throttleLoginTtl", 60000),
+          limit: config.get<number>("throttleLoginLimit", 1000),
         },
         {
           // Named configuration 'singup'
-          name: 'singup',
-          ttl: config.get<number>('throttleSingupTtl', 60000),
-          limit: config.get<number>('throttleSingupLimit', 1000),
+          name: "singup",
+          ttl: config.get<number>("throttleSingupTtl", 60000),
+          limit: config.get<number>("throttleSingupLimit", 1000),
         },
         {
           // Named configuration 'first-deposit'
-          name: 'first-deposit',
-          ttl: config.get<number>('throttleFirstDepositTtl', 60000),
-          limit: config.get<number>('throttleFirstDepositLimit', 1000),
+          name: "first-deposit",
+          ttl: config.get<number>("throttleFirstDepositTtl", 60000),
+          limit: config.get<number>("throttleFirstDepositLimit", 1000),
         },
         {
           // Named configuration 'deposit'
-          name: 'deposit',
-          ttl: config.get<number>('throttleDepositTtl', 60000),
-          limit: config.get<number>('throttleDepositLimit', 1000),
+          name: "deposit",
+          ttl: config.get<number>("throttleDepositTtl", 60000),
+          limit: config.get<number>("throttleDepositLimit", 1000),
         },
       ],
     }),

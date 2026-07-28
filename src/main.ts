@@ -20,7 +20,9 @@ async function bootstrap() {
   );
   const configBuilder = new DocumentBuilder()
     .setTitle("Tagging Server Side Api")
-    .setDescription("Este es un API para enviar eventos de tagging a Cuentas de Analytics desde el servidor.")
+    .setDescription(
+      "Este es un API para enviar eventos de tagging a Cuentas de Analytics desde el servidor."
+    )
     .setVersion("1.0")
     .setExternalDoc(
       "Documentación",
@@ -31,7 +33,7 @@ async function bootstrap() {
     include: [TaggingModule],
   });
   SwaggerModule.setup(`${process.env.GLOBAL_PREFIX}`, app, document);
-  await app.listen(`${process.env.PORT}`, '0.0.0.0');
+  await app.listen(`${process.env.PORT}`, "0.0.0.0");
   console.log("🚀 Server listen in: ", `${process.env.PORT}`);
 }
 bootstrap();

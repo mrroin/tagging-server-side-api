@@ -11,7 +11,7 @@ import { ConfigService } from "@nestjs/config";
 export class TaggingController {
   constructor(
     private readonly taggingService: TaggingService,
-    private readonly _configService: ConfigService,
+    private readonly _configService: ConfigService
   ) {}
 
   @Post("login")
@@ -60,7 +60,7 @@ export class TaggingController {
     status: 429,
     description: "ThrottlerException: Too Many Requests",
   })
-  @Throttle({ 'first-deposit': {} })
+  @Throttle({ "first-deposit": {} })
   firstDeposit(@Body() taggingDto: TaggingDto) {
     return this.taggingService.firstDeposit(taggingDto);
   }
@@ -77,7 +77,7 @@ export class TaggingController {
     status: 429,
     description: "ThrottlerException: Too Many Requests",
   })
-  @Throttle({ 'deposit': {} })
+  @Throttle({ deposit: {} })
   deposit(@Body() taggingDto: TaggingDto) {
     return this.taggingService.deposit(taggingDto);
   }

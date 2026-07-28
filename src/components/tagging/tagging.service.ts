@@ -7,6 +7,7 @@ import { ConfigService } from "@nestjs/config";
 import { TaggingDto } from "./dto/tagging.dto";
 import { TaggingManagerService } from "@common/services/tagging-manager.service";
 import { TaggingResponseDto } from "./dto/tagging-response.dto";
+import { instanceToPlain } from "class-transformer";
 
 @Injectable()
 export class TaggingService {
@@ -26,10 +27,11 @@ export class TaggingService {
       taggingDto
     );
     try {
+      const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging("userId7", "login", {
         myData: "tagging-server-side-api",
         session_id: Date.now().toString(),
-        ...taggingDto,
+        ...jsonObject,
       });
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para login"
@@ -44,14 +46,21 @@ export class TaggingService {
       "TaggingService => singup, llegando a service: ",
       taggingDto
     );
-    await this._TaggingManagerService.sendTagging("userId7", "singup", {
-      myData: "tagging-server-side-api",
-      session_id: Date.now().toString(),
-      ...taggingDto,
-    });
-    return new TaggingResponseDto(
-      "Este evento agrego un nuevo tagging para singup"
-    );
+    try {
+      const jsonObject = instanceToPlain(taggingDto);
+      await this._TaggingManagerService.sendTagging("userId7", "singup", {
+        myData: "tagging-server-side-api",
+        session_id: Date.now().toString(),
+        ...jsonObject,
+      });
+      return new TaggingResponseDto(
+        "Este evento agrego un nuevo tagging para singup"
+      );
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "Error sending tagging for singup"
+      );
+    }
   }
 
   async firstDeposit(taggingDto: TaggingDto | any) {
@@ -59,14 +68,21 @@ export class TaggingService {
       "TaggingService => firstDeposit, llegando a service: ",
       taggingDto
     );
-    await this._TaggingManagerService.sendTagging("userId7", "firstDeposit", {
-      myData: "tagging-server-side-api",
-      session_id: Date.now().toString(),
-      ...taggingDto,
-    });
-    return new TaggingResponseDto(
-      "Este evento agrego un nuevo tagging para first deposit"
-    );
+    try {
+      const jsonObject = instanceToPlain(taggingDto);
+      await this._TaggingManagerService.sendTagging("userId7", "firstDeposit", {
+        myData: "tagging-server-side-api",
+        session_id: Date.now().toString(),
+        ...jsonObject,
+      });
+      return new TaggingResponseDto(
+        "Este evento agrego un nuevo tagging para first firstDeposit"
+      );
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "Error sending tagging for firstDeposit"
+      );
+    }
   }
 
   async deposit(taggingDto: TaggingDto | any) {
@@ -74,13 +90,20 @@ export class TaggingService {
       "TaggingService => deposit, llegando a service: ",
       taggingDto
     );
-    await this._TaggingManagerService.sendTagging("userId7", "deposit", {
-      myData: "tagging-server-side-api",
-      session_id: Date.now().toString(),
-      ...taggingDto,
-    });
-    return new TaggingResponseDto(
-      "Este evento agrego un nuevo tagging para deposit"
-    );
+    try {
+      const jsonObject = instanceToPlain(taggingDto);
+      await this._TaggingManagerService.sendTagging("userId7", "deposit", {
+        myData: "tagging-server-side-api",
+        session_id: Date.now().toString(),
+        ...jsonObject,
+      });
+      return new TaggingResponseDto(
+        "Este evento agrego un nuevo tagging para deposit"
+      );
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "Error sending tagging for deposit"
+      );
+    }
   }
 }
