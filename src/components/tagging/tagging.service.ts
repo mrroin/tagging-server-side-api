@@ -26,11 +26,11 @@ export class TaggingService {
       taggingDto
     );
     try {
-      // await this._TaggingManagerService.sendTagging("userId7", "nestapi", {
-      //   myData: "tagging-server-side-api",
-      //   session_id: Date.now().toString(),
-      //   ...taggingDto,
-      // });
+      await this._TaggingManagerService.sendTagging("userId7", "login", {
+        myData: "tagging-server-side-api",
+        session_id: Date.now().toString(),
+        ...taggingDto,
+      });
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para login"
       );
@@ -39,31 +39,46 @@ export class TaggingService {
     }
   }
 
-  singup(taggingDto: TaggingDto | any) {
+  async singup(taggingDto: TaggingDto | any) {
     this.logger.log(
       "TaggingService => singup, llegando a service: ",
       taggingDto
     );
+    await this._TaggingManagerService.sendTagging("userId7", "singup", {
+      myData: "tagging-server-side-api",
+      session_id: Date.now().toString(),
+      ...taggingDto,
+    });
     return new TaggingResponseDto(
       "Este evento agrego un nuevo tagging para singup"
     );
   }
 
-  firstDeposit(taggingDto: TaggingDto | any) {
+  async firstDeposit(taggingDto: TaggingDto | any) {
     this.logger.log(
       "TaggingService => firstDeposit, llegando a service: ",
       taggingDto
     );
+    await this._TaggingManagerService.sendTagging("userId7", "firstDeposit", {
+      myData: "tagging-server-side-api",
+      session_id: Date.now().toString(),
+      ...taggingDto,
+    });
     return new TaggingResponseDto(
       "Este evento agrego un nuevo tagging para first deposit"
     );
   }
 
-  deposit(taggingDto: TaggingDto | any) {
+  async deposit(taggingDto: TaggingDto | any) {
     this.logger.log(
       "TaggingService => deposit, llegando a service: ",
       taggingDto
     );
+    await this._TaggingManagerService.sendTagging("userId7", "deposit", {
+      myData: "tagging-server-side-api",
+      session_id: Date.now().toString(),
+      ...taggingDto,
+    });
     return new TaggingResponseDto(
       "Este evento agrego un nuevo tagging para deposit"
     );
