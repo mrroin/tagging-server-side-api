@@ -24,7 +24,7 @@ export class TaggingService {
   async login(taggingDto: TaggingDto | any) {
     this.logger.log(
       "TaggingService => login, llegando a service: ",
-      taggingDto
+      JSON.stringify(taggingDto)
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
@@ -44,7 +44,7 @@ export class TaggingService {
   async singup(taggingDto: TaggingDto | any) {
     this.logger.log(
       "TaggingService => singup, llegando a service: ",
-      taggingDto
+      JSON.stringify(taggingDto)
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
@@ -66,7 +66,7 @@ export class TaggingService {
   async firstDeposit(taggingDto: TaggingDto | any) {
     this.logger.log(
       "TaggingService => firstDeposit, llegando a service: ",
-      taggingDto
+      JSON.stringify(taggingDto)
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
@@ -88,7 +88,7 @@ export class TaggingService {
   async deposit(taggingDto: TaggingDto | any) {
     this.logger.log(
       "TaggingService => deposit, llegando a service: ",
-      taggingDto
+      JSON.stringify(taggingDto)
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);

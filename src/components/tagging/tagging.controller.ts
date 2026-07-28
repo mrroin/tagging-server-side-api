@@ -27,7 +27,7 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ login: {} })
-  login(@Body() taggingDto: TaggingDto) {
+  login(@Body() taggingDto: TaggingDto | any) {
     return this.taggingService.login(taggingDto);
   }
 
@@ -44,7 +44,7 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ singup: {} })
-  singup(@Body() taggingDto: TaggingDto) {
+  singup(@Body() taggingDto: TaggingDto | any) {
     return this.taggingService.singup(taggingDto);
   }
 
@@ -61,7 +61,7 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ "first-deposit": {} })
-  firstDeposit(@Body() taggingDto: TaggingDto) {
+  firstDeposit(@Body() taggingDto: TaggingDto | any) {
     return this.taggingService.firstDeposit(taggingDto);
   }
 
@@ -78,7 +78,7 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ deposit: {} })
-  deposit(@Body() taggingDto: TaggingDto) {
+  deposit(@Body() taggingDto: TaggingDto | any) {
     return this.taggingService.deposit(taggingDto);
   }
 }
