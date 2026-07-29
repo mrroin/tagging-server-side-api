@@ -70,10 +70,10 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      await this._TaggingManagerService.sendTagging("userId7", "firstDeposit", {
-        myData: "tagging-server-side-api",
-        session_id: Date.now().toString(),
-        ...jsonObject,
+      await this._TaggingManagerService.sendTagging(jsonObject?.user, "vivento_ftd", {
+        value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+        transaction_id: jsonObject?.operation,
+        currency: jsonObject?.currency,
       });
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para first firstDeposit"
@@ -92,10 +92,10 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      await this._TaggingManagerService.sendTagging("userId7", "deposit", {
-        myData: "tagging-server-side-api",
-        session_id: Date.now().toString(),
-        ...jsonObject,
+      await this._TaggingManagerService.sendTagging(jsonObject?.user, "vivento_redeposit", {
+        value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+        transaction_id: jsonObject?.operation,
+        currency: jsonObject?.currency,
       });
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para deposit"
