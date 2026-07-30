@@ -70,11 +70,17 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      await this._TaggingManagerService.sendTagging(jsonObject?.user, "vivento_ftd", {
-        value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
-        transaction_id: jsonObject?.operation,
-        currency: jsonObject?.currency,
-      });
+      await this._TaggingManagerService.sendTagging(
+        jsonObject?.clientIdGT || jsonObject?.user,
+        "vivento_ftd",
+        {
+          value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+          transaction_id: jsonObject?.operation,
+          currency: jsonObject?.currency,
+          user: jsonObject?.user,
+          session_id: jsonObject?.sessionIdGT,
+        }
+      );
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para first firstDeposit"
       );
@@ -92,11 +98,17 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      await this._TaggingManagerService.sendTagging(jsonObject?.user, "vivento_redeposit", {
-        value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
-        transaction_id: jsonObject?.operation,
-        currency: jsonObject?.currency,
-      });
+      await this._TaggingManagerService.sendTagging(
+        jsonObject?.clientIdGT || jsonObject?.user,
+        "vivento_redeposit",
+        {
+          value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+          transaction_id: jsonObject?.operation,
+          currency: jsonObject?.currency,
+          user: jsonObject?.user,
+          session_id: jsonObject?.sessionIdGT,
+        }
+      );
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para deposit"
       );
@@ -114,10 +126,19 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      await this._TaggingManagerService.sendTagging(jsonObject?.user, "vivento_verify", {
-        transaction_id: jsonObject?.operation,
-        verifyDate: jsonObject?.verifyDate,
-      });
+      await this._TaggingManagerService.sendTagging(
+        jsonObject?.clientIdGT || jsonObject?.user,
+        "vivento_verify",
+        {
+          transaction_id: jsonObject?.operation,
+          verifyDate: new Date().toISOString(),
+          status: jsonObject?.status,
+          success: jsonObject?.success,
+          verified: jsonObject?.verified,
+          user: jsonObject?.user,
+          session_id: jsonObject?.sessionIdGT,
+        }
+      );
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para verify"
       );

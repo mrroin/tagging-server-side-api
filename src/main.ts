@@ -34,6 +34,9 @@ async function bootstrap() {
   });
   SwaggerModule.setup(`${process.env.GLOBAL_PREFIX}`, app, document);
   await app.listen(`${process.env.PORT}`, "0.0.0.0");
-  console.log("🚀 Server listen in: ", `${process.env.PORT}, version 0.0.1 200726 18:58`);
+  console.log(
+    "🚀 Server listen in: ",
+    `${process.env.PORT}, version 0.0.1 300726 15:18`
+  );
 }
 bootstrap();

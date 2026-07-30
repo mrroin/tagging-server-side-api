@@ -94,7 +94,7 @@ export class TaggingController {
     status: 429,
     description: "ThrottlerException: Too Many Requests",
   })
-  @Throttle({ login: {} })
+  @Throttle({ general: {} })
   verify(@Body() taggingDto: TaggingDto | any) {
     return this.taggingService.verify(taggingDto);
   }

@@ -2,6 +2,8 @@ export const EnvConfiguration = () => ({
   // -- APLICATION
   port: parseInt(process.env.PORT),
   globalPrefix: process.env.GLOBAL_PREFIX,
+  throttleGeneralTtl: parseInt(process.env.THROTTLE_GENERAL_TTL),
+  throttleGeneralLimit: parseInt(process.env.THROTTLE_GENERAL_LIMIT),
   throttleLoginTtl: parseInt(process.env.THROTTLE_LOGIN_TTL),
   throttleLoginLimit: parseInt(process.env.THROTTLE_LOGIN_LIMIT),
   throttleSingupTtl: parseInt(process.env.THROTTLE_SINGUP_TTL),

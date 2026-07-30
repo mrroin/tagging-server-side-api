@@ -4,6 +4,8 @@ export const JoiValidationSchema = Joi.object({
   // -- APLICATION
   port: Joi.number().default(3000),
   globalPrefix: Joi.string().default("api"),
+  throttleGeneralTtl: Joi.number().default(60000),
+  throttleGeneralLimit: Joi.number().default(1000),
   throttleLoginTtl: Joi.number().default(60000),
   throttleLoginLimit: Joi.number().default(1000),
   throttleSingupTtl: Joi.number().default(60000),

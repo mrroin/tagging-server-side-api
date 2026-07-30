@@ -13,6 +13,12 @@ import { APP_GUARD } from "@nestjs/core";
       inject: [ConfigService],
       useFactory: (config: ConfigService) => [
         {
+          // Named configuration 'general'
+          name: "general",
+          ttl: config.get<number>("throttleGeneralTtl", 60000),
+          limit: config.get<number>("throttleGeneralLimit", 1000),
+        },
+        {
           // Named configuration 'login'
           name: "login",
           ttl: config.get<number>("throttleLoginTtl", 60000),
