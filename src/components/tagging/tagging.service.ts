@@ -106,4 +106,25 @@ export class TaggingService {
       );
     }
   }
+
+  async verify(taggingDto: TaggingDto | any) {
+    this.logger.log(
+      "TaggingService => verify, llegando a service: ",
+      JSON.stringify(taggingDto)
+    );
+    try {
+      const jsonObject = instanceToPlain(taggingDto);
+      await this._TaggingManagerService.sendTagging(jsonObject?.user, "vivento_verify", {
+        transaction_id: jsonObject?.operation,
+        verifyDate: jsonObject?.verifyDate,
+      });
+      return new TaggingResponseDto(
+        "Este evento agrego un nuevo tagging para verify"
+      );
+    } catch (error) {
+      throw new InternalServerErrorException(
+        "Error sending tagging for verify"
+      );
+    }
+  }
 }

@@ -81,4 +81,21 @@ export class TaggingController {
   deposit(@Body() taggingDto: TaggingDto | any) {
     return this.taggingService.deposit(taggingDto);
   }
+
+  @Post("verify")
+  @HttpCode(200)
+  @ApiResponse({
+    status: 200,
+    description: "La solicitud fue procesada",
+    type: TaggingResponseDto,
+  })
+  @ApiResponse({ status: 500, description: "Error al procesar la solicitud" })
+  @ApiResponse({
+    status: 429,
+    description: "ThrottlerException: Too Many Requests",
+  })
+  @Throttle({ login: {} })
+  verify(@Body() taggingDto: TaggingDto | any) {
+    return this.taggingService.verify(taggingDto);
+  }
 }
