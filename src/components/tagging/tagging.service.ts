@@ -60,7 +60,7 @@ export class TaggingService {
           company: jsonObject?.company,
           alias: jsonObject?.alias,
           email: jsonObject?.email,
-          extra: jsonObject?.extra,
+          // extra: jsonObject?.extra,
         }
       );
       return new TaggingResponseDto(
@@ -89,7 +89,7 @@ export class TaggingService {
           currency: jsonObject?.currency,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
-          extra: jsonObject?.extra,
+          // extra: jsonObject?.extra,
         }
       );
       return new TaggingResponseDto(
@@ -118,7 +118,7 @@ export class TaggingService {
           currency: jsonObject?.currency,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
-          extra: jsonObject?.extra,
+          // extra: jsonObject?.extra,
         }
       );
       return new TaggingResponseDto(
@@ -149,7 +149,7 @@ export class TaggingService {
           verified: jsonObject?.verified,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
-          extra: jsonObject?.extra,
+          // extra: jsonObject?.extra,
         }
       );
       return new TaggingResponseDto(
