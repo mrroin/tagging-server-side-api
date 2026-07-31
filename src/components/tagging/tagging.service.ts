@@ -28,11 +28,14 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      await this._TaggingManagerService.sendTagging("userId7", "login", {
-        myData: "tagging-server-side-api",
-        session_id: Date.now().toString(),
-        ...jsonObject,
-      });
+      await this._TaggingManagerService.sendTagging(
+        jsonObject?.extra?.clientIdGT || jsonObject?.user,
+        "login",
+        {
+          session_id: jsonObject?.extra?.sessionIdGT,
+          ...jsonObject,
+        }
+      );
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para login"
       );
@@ -48,11 +51,18 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      await this._TaggingManagerService.sendTagging("userId7", "singup", {
-        myData: "tagging-server-side-api",
-        session_id: Date.now().toString(),
-        ...jsonObject,
-      });
+      await this._TaggingManagerService.sendTagging(
+        jsonObject?.extra?.clientIdGT || jsonObject?.user,
+        "singup",
+        {
+          user: jsonObject?.user_id,
+          session_id: jsonObject?.extra?.sessionIdGT,
+          company: jsonObject?.company,
+          alias: jsonObject?.alias,
+          email: jsonObject?.email,
+          extra: jsonObject?.extra,
+        }
+      );
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para singup"
       );
@@ -71,14 +81,15 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.clientIdGT || jsonObject?.user,
+        jsonObject?.extra?.clientIdGT || jsonObject?.user,
         "vivento_ftd",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
           transaction_id: jsonObject?.operation,
           currency: jsonObject?.currency,
           user: jsonObject?.user,
-          session_id: jsonObject?.sessionIdGT,
+          session_id: jsonObject?.extra?.sessionIdGT,
+          extra: jsonObject?.extra,
         }
       );
       return new TaggingResponseDto(
@@ -99,14 +110,15 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.clientIdGT || jsonObject?.user,
+        jsonObject?.extra?.clientIdGT || jsonObject?.user,
         "vivento_redeposit",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
           transaction_id: jsonObject?.operation,
           currency: jsonObject?.currency,
           user: jsonObject?.user,
-          session_id: jsonObject?.sessionIdGT,
+          session_id: jsonObject?.extra?.sessionIdGT,
+          extra: jsonObject?.extra,
         }
       );
       return new TaggingResponseDto(
@@ -127,7 +139,7 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.clientIdGT || jsonObject?.user,
+        jsonObject?.extra?.clientIdGT || jsonObject?.user,
         "vivento_verify",
         {
           transaction_id: jsonObject?.operation,
@@ -136,7 +148,8 @@ export class TaggingService {
           success: jsonObject?.success,
           verified: jsonObject?.verified,
           user: jsonObject?.user,
-          session_id: jsonObject?.sessionIdGT,
+          session_id: jsonObject?.extra?.sessionIdGT,
+          extra: jsonObject?.extra,
         }
       );
       return new TaggingResponseDto(
