@@ -29,10 +29,11 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.extra?.clientIdGT || jsonObject?.user,
+        `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
         "login",
         {
           session_id: jsonObject?.extra?.sessionIdGT,
+          client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
           ...jsonObject,
         }
       );
@@ -52,7 +53,7 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.extra?.clientIdGT || jsonObject?.user,
+        `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
         "singup",
         {
           user: jsonObject?.user_id,
@@ -60,6 +61,7 @@ export class TaggingService {
           company: jsonObject?.company,
           alias: jsonObject?.alias,
           email: jsonObject?.email,
+          client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
           // extra: jsonObject?.extra,
         }
       );
@@ -81,7 +83,7 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.extra?.clientIdGT || jsonObject?.user,
+        `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
         "vivento_ftd",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
@@ -89,6 +91,7 @@ export class TaggingService {
           currency: jsonObject?.currency,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
+          client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
           // extra: jsonObject?.extra,
         }
       );
@@ -110,7 +113,7 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.extra?.clientIdGT || jsonObject?.user,
+        `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
         "vivento_redeposit",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
@@ -118,6 +121,7 @@ export class TaggingService {
           currency: jsonObject?.currency,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
+          client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
           // extra: jsonObject?.extra,
         }
       );
@@ -139,7 +143,7 @@ export class TaggingService {
     try {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
-        jsonObject?.extra?.clientIdGT || jsonObject?.user,
+        `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
         "vivento_verify",
         {
           transaction_id: jsonObject?.operation,
