@@ -30,7 +30,7 @@ export class TaggingService {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
         `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
-        "login",
+        "api_login",
         {
           session_id: jsonObject?.extra?.sessionIdGT,
           client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
@@ -54,7 +54,7 @@ export class TaggingService {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
         `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
-        "singup",
+        "api_singup",
         {
           user: jsonObject?.user_id,
           session_id: jsonObject?.extra?.sessionIdGT,
@@ -84,7 +84,7 @@ export class TaggingService {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
         `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
-        "vivento_ftd",
+        "api_vivento_ftd",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
           transaction_id: jsonObject?.operation,
@@ -114,7 +114,7 @@ export class TaggingService {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
         `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
-        "vivento_redeposit",
+        "api_vivento_redeposit",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
           transaction_id: jsonObject?.operation,
@@ -144,7 +144,7 @@ export class TaggingService {
       const jsonObject = instanceToPlain(taggingDto);
       await this._TaggingManagerService.sendTagging(
         `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
-        "vivento_verify",
+        "api_vivento_verify",
         {
           transaction_id: jsonObject?.operation,
           verifyDate: new Date().toISOString(),
