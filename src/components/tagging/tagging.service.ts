@@ -62,6 +62,9 @@ export class TaggingService {
           alias: jsonObject?.alias,
           email: jsonObject?.email,
           client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
+          registerMethod: jsonObject?.extra?.registerMethod,
+          country: jsonObject?.extra?.country,
+          affiliate: jsonObject?.extra?.affiliate,
           // extra: jsonObject?.extra,
         }
       );
