@@ -25,34 +25,26 @@ export class TaggingManagerService {
     clientId: string,
     eventName: string,
     eventParams: any,
-    utmParams: any,
+    utmParams: any
   ) {
     try {
       this.logger.log(this.googleUrl);
       const events = [];
-      if(utmParams && utmParams?.source){
-        events.push(
-           {
-              name: 'campaign_details',
-              params: {
-                session_id: Number(utmParams.sessionId), // Vital que sea un número entero
-                source: utmParams.utmSource,
-                medium: utmParams.utmMedium,
-                campaign: utmParams.utmCampaign,
-              },
-            },
-        );
+      console.log("sendTagging => utmParams: ", utmParams);
+      if (utmParams && utmParams?.source) {
+        events.push({
+          name: "campaign_details",
+          params: utmParams,
+        });
       }
       events.push({
-            name: eventName,
-            params: {
-              ...eventParams,
-              engagement_time_msec: this._configService.get(
-                "googleEngagementTime"
-              ),
-              debug_mode: this._configService.get("googleDebug"),
-            },
-          });
+        name: eventName,
+        params: {
+          ...eventParams,
+          engagement_time_msec: this._configService.get("googleEngagementTime"),
+          debug_mode: this._configService.get("googleDebug"),
+        },
+      });
       const payload = {
         client_id: clientId,
         events: events,
