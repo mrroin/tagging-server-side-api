@@ -24,14 +24,26 @@ export class TaggingManagerService {
   public async sendTagging(
     clientId: string,
     eventName: string,
-    eventParams: any
+    eventParams: any,
+    utmParams: any,
   ) {
     try {
       this.logger.log(this.googleUrl);
-      const payload = {
-        client_id: clientId,
-        events: [
-          {
+      const events = [];
+      if(utmParams && utmParams?.source){
+        events.push(
+           {
+              name: 'campaign_details',
+              params: {
+                session_id: Number(utmParams.sessionId), // Vital que sea un número entero
+                source: utmParams.utmSource,
+                medium: utmParams.utmMedium,
+                campaign: utmParams.utmCampaign,
+              },
+            },
+        );
+      }
+      events.push({
             name: eventName,
             params: {
               ...eventParams,
@@ -40,8 +52,10 @@ export class TaggingManagerService {
               ),
               debug_mode: this._configService.get("googleDebug"),
             },
-          },
-        ],
+          });
+      const payload = {
+        client_id: clientId,
+        events: events,
       };
       this.logger.log("sendTagging => payload: ");
       this.logger.log(payload);

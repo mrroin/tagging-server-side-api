@@ -35,6 +35,12 @@ export class TaggingService {
           session_id: jsonObject?.extra?.sessionIdGT,
           client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
           ...jsonObject,
+        },
+        {
+          session_id: Number(jsonObject?.extra?.sessionIdGT),
+          source: jsonObject?.extra?.campaign?.source,
+          medium: jsonObject?.extra?.campaign?.medium,
+          campaign: jsonObject?.extra?.campaign?.name,
         }
       );
       return new TaggingResponseDto(
@@ -66,6 +72,12 @@ export class TaggingService {
           country: jsonObject?.extra?.country,
           affiliate: jsonObject?.extra?.affiliate,
           // extra: jsonObject?.extra,
+        },
+        {
+          session_id: Number(jsonObject?.extra?.sessionIdGT),
+          source: jsonObject?.extra?.campaign?.source,
+          medium: jsonObject?.extra?.campaign?.medium,
+          campaign: jsonObject?.extra?.campaign?.name,
         }
       );
       return new TaggingResponseDto(
@@ -96,6 +108,12 @@ export class TaggingService {
           session_id: jsonObject?.extra?.sessionIdGT,
           client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
           // extra: jsonObject?.extra,
+        },
+        {
+          session_id: Number(jsonObject?.extra?.sessionIdGT),
+          source: jsonObject?.extra?.campaign?.source,
+          medium: jsonObject?.extra?.campaign?.medium,
+          campaign: jsonObject?.extra?.campaign?.name,
         }
       );
       return new TaggingResponseDto(
@@ -126,6 +144,12 @@ export class TaggingService {
           session_id: jsonObject?.extra?.sessionIdGT,
           client_id: `${jsonObject?.extra?.clientIdGT || jsonObject?.user}`,
           // extra: jsonObject?.extra,
+        },
+        {
+          session_id: Number(jsonObject?.extra?.sessionIdGT),
+          source: jsonObject?.extra?.campaign?.source,
+          medium: jsonObject?.extra?.campaign?.medium,
+          campaign: jsonObject?.extra?.campaign?.name,
         }
       );
       return new TaggingResponseDto(
@@ -157,6 +181,12 @@ export class TaggingService {
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
           // extra: jsonObject?.extra,
+        },
+        {
+          session_id: Number(jsonObject?.extra?.sessionIdGT),
+          source: jsonObject?.extra?.campaign?.source,
+          medium: jsonObject?.extra?.campaign?.medium,
+          campaign: jsonObject?.extra?.campaign?.name,
         }
       );
       return new TaggingResponseDto(
