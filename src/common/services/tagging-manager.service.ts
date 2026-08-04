@@ -34,7 +34,11 @@ export class TaggingManagerService {
       if (utmParams && utmParams?.source) {
         events.push({
           name: "campaign_details",
-          params: utmParams,
+          params: {
+            ...utmParams,
+            engagement_time_msec: this._configService.get("googleEngagementTime"),
+            debug_mode: this._configService.get("googleDebug"),
+          },
         });
       }
       events.push({
