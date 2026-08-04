@@ -30,7 +30,6 @@ export class TaggingManagerService {
     try {
       this.logger.log(this.googleUrl);
       const events = [];
-      console.log("sendTagging => utmParams: ", utmParams);
       if (utmParams && utmParams?.source) {
         events.push({
           name: "campaign_details",
@@ -58,7 +57,7 @@ export class TaggingManagerService {
       await this._httpAdapterService.post(this.googleUrl, payload);
       return { success: true, message: "Tagging enviado exitosamente" };
     } catch (error) {
-      console.error("Error al enviar el correo: ", error);
+      this.logger.error("Error al enviar el correo: ", error);
       return { success: false, message: "Fallo al enviar el tagging" };
     }
   }
