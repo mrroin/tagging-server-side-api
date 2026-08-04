@@ -28,12 +28,13 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
+      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
       await this._TaggingManagerService.sendTagging(
-        `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+        client_id,
         "api_login",
         {
           session_id: jsonObject?.extra?.sessionIdGT,
-          client_id: `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+          client_id,
           ...jsonObject,
           source: jsonObject?.extra?.campaign?.source,
           medium: jsonObject?.extra?.campaign?.medium,
@@ -61,8 +62,9 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
+      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
       await this._TaggingManagerService.sendTagging(
-        `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+        client_id,
         "api_singup",
         {
           user: jsonObject?.user_id,
@@ -70,7 +72,7 @@ export class TaggingService {
           company: jsonObject?.company,
           alias: jsonObject?.alias,
           email: jsonObject?.email,
-          client_id: `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+          client_id,
           registerMethod: jsonObject?.extra?.registerMethod,
           country: jsonObject?.extra?.country,
           affiliate: jsonObject?.extra?.affiliate,
@@ -103,8 +105,9 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
+      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
       await this._TaggingManagerService.sendTagging(
-        `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+        client_id,
         "api_vivento_ftd",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
@@ -112,7 +115,7 @@ export class TaggingService {
           currency: jsonObject?.currency,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
-          client_id: `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+          client_id,
           // extra: jsonObject?.extra,
           source: jsonObject?.extra?.campaign?.source,
           medium: jsonObject?.extra?.campaign?.medium,
@@ -142,8 +145,9 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
+      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
       await this._TaggingManagerService.sendTagging(
-        `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+        client_id,
         "api_vivento_redeposit",
         {
           value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
@@ -151,7 +155,7 @@ export class TaggingService {
           currency: jsonObject?.currency,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
-          client_id: `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+          client_id,
           // extra: jsonObject?.extra,
           source: jsonObject?.extra?.campaign?.source,
           medium: jsonObject?.extra?.campaign?.medium,
@@ -181,8 +185,9 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
+      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
       await this._TaggingManagerService.sendTagging(
-        `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`,
+        client_id,
         "api_vivento_verify",
         {
           transaction_id: jsonObject?.operation,
