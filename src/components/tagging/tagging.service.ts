@@ -62,7 +62,7 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
+      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user_id}`;
       await this._TaggingManagerService.sendTagging(
         client_id,
         "api_singup",
