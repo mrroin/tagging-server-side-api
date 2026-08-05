@@ -3,6 +3,7 @@ import { IsNumber, IsObject, IsOptional, IsString, ValidateIf, ValidateNested } 
 import { Type } from "class-transformer";
 import { Optional } from "@nestjs/common";
 import { SingupExtraTaggingDto } from "./singup-extra-tagging.dto";
+import { IsStringOrNumber } from "@common/decorators/is-string-or-number.decorator";
 
 @ApiSchema({
   description:
@@ -14,10 +15,7 @@ export class SingupTaggingDto {
     description: "Usuario que realiza la operación",
     required: true,
   })
-  @ValidateIf((o) => typeof o.userId === 'string')
-  @IsString()
-  @ValidateIf((o) => typeof o.userId === 'number')
-  @IsNumber()
+  @IsStringOrNumber()
   user_id: string | number;
 
   @ApiProperty({

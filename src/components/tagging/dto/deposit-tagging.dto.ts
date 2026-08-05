@@ -2,6 +2,7 @@ import { ApiProperty, ApiSchema } from "@nestjs/swagger";
 import { IsNumber, IsObject, IsOptional, IsString, ValidateIf, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 import { ExtraTaggingDto } from "./extra-tagging.dto";
+import { IsStringOrNumber } from "@common/decorators/is-string-or-number.decorator";
 
 @ApiSchema({
   description:
@@ -13,10 +14,7 @@ export class DepositTaggingDto {
     description: "Usuario que realiza la operación",
     required: true,
   })
-  @ValidateIf((o) => typeof o.userId === 'string')
-  @IsString()
-  @ValidateIf((o) => typeof o.userId === 'number')
-  @IsNumber()
+  @IsStringOrNumber()
   user: string | number;
   
   @ApiProperty({
