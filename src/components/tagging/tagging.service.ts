@@ -4,10 +4,13 @@ import {
   Logger,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { TaggingDto } from "./dto/tagging.dto";
 import { TaggingManagerService } from "@common/services/tagging-manager.service";
 import { TaggingResponseDto } from "./dto/tagging-response.dto";
 import { instanceToPlain } from "class-transformer";
+import { LoginTaggingDto } from "./dto/login-tagging.dto";
+import { SingupTaggingDto } from "./dto/singup-tagging.dto";
+import { DepositTaggingDto } from "./dto/deposit-tagging.dto";
+import { VerifyTaggingDto } from "./dto/verify-tagging.dto";
 
 @Injectable()
 export class TaggingService {
@@ -21,7 +24,7 @@ export class TaggingService {
     );
   }
 
-  async login(taggingDto: TaggingDto | any) {
+  async login(taggingDto: LoginTaggingDto) {
     this.logger.log(
       "TaggingService => login, llegando a service: ",
       JSON.stringify(taggingDto)
@@ -55,7 +58,7 @@ export class TaggingService {
     }
   }
 
-  async singup(taggingDto: TaggingDto | any) {
+  async singup(taggingDto: SingupTaggingDto) {
     this.logger.log(
       "TaggingService => singup, llegando a service: ",
       JSON.stringify(taggingDto)
@@ -98,7 +101,7 @@ export class TaggingService {
     }
   }
 
-  async firstDeposit(taggingDto: TaggingDto | any) {
+  async firstDeposit(taggingDto: DepositTaggingDto) {
     this.logger.log(
       "TaggingService => firstDeposit, llegando a service: ",
       JSON.stringify(taggingDto)
@@ -138,7 +141,7 @@ export class TaggingService {
     }
   }
 
-  async deposit(taggingDto: TaggingDto | any) {
+  async deposit(taggingDto: DepositTaggingDto) {
     this.logger.log(
       "TaggingService => deposit, llegando a service: ",
       JSON.stringify(taggingDto)
@@ -178,7 +181,7 @@ export class TaggingService {
     }
   }
 
-  async verify(taggingDto: TaggingDto | any) {
+  async verify(taggingDto: VerifyTaggingDto) {
     this.logger.log(
       "TaggingService => verify, llegando a service: ",
       JSON.stringify(taggingDto)
@@ -197,6 +200,7 @@ export class TaggingService {
           verified: jsonObject?.verified,
           user: jsonObject?.user,
           session_id: jsonObject?.extra?.sessionIdGT,
+          client_id,
           // extra: jsonObject?.extra,
           source: jsonObject?.extra?.campaign?.source,
           medium: jsonObject?.extra?.campaign?.medium,
