@@ -1,5 +1,10 @@
 import { ApiProperty, ApiSchema } from "@nestjs/swagger";
-import { IsNumber, IsObject, IsOptional, IsString, ValidateIf, ValidateNested } from "class-validator";
+import {
+  IsObject,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { ExtraTaggingDto } from "./extra-tagging.dto";
 import { IsStringOrNumber } from "@common/decorators/is-string-or-number.decorator";
@@ -16,7 +21,7 @@ export class DepositTaggingDto {
   })
   @IsStringOrNumber()
   user: string | number;
-  
+
   @ApiProperty({
     example: "5010",
     description: "Monto de la operación, con centavos sin punto",
@@ -25,7 +30,7 @@ export class DepositTaggingDto {
   @IsString()
   @IsOptional()
   amount?: string;
-  
+
   @ApiProperty({
     example: "39879",
     description: "Identificador de la operación",
@@ -34,7 +39,7 @@ export class DepositTaggingDto {
   @IsString()
   @IsOptional()
   operation?: string;
-  
+
   @ApiProperty({
     example: "MXN",
     description: "Moneda en la que se ralizar la operación",
@@ -46,13 +51,13 @@ export class DepositTaggingDto {
 
   @ApiProperty({
     example: {
-      "sessionIdGT": "1785533276",
-      "clientIdGT": "1462492111.1785533277",
-      "campaign": {
-          "source": "google",
-          "medium": "cpc",
-          "name": "brandterms_general"
-      }
+      sessionIdGT: "1785533276",
+      clientIdGT: "1462492111.1785533277",
+      campaign: {
+        source: "google",
+        medium: "cpc",
+        name: "brandterms_general",
+      },
     },
     description: "Información de la extra de Google Tag Manager y campaña",
     required: false,

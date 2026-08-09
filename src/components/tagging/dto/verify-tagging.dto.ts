@@ -1,5 +1,11 @@
 import { ApiProperty, ApiSchema } from "@nestjs/swagger";
-import { IsBoolean, IsNumber, IsObject, IsOptional, IsString, ValidateIf, ValidateNested } from "class-validator";
+import {
+  IsBoolean,
+  IsObject,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { ExtraTaggingDto } from "./extra-tagging.dto";
 import { IsStringOrNumber } from "@common/decorators/is-string-or-number.decorator";
@@ -16,7 +22,7 @@ export class VerifyTaggingDto {
   })
   @IsStringOrNumber()
   user: string | number;
-  
+
   @ApiProperty({
     example: "APPROVED",
     description: "Estado de la operación",
@@ -25,7 +31,7 @@ export class VerifyTaggingDto {
   @IsString()
   @IsOptional()
   status?: string;
-  
+
   @ApiProperty({
     example: true,
     description: "Resultado exitoso de la operación",
@@ -34,7 +40,7 @@ export class VerifyTaggingDto {
   @IsBoolean()
   @IsOptional()
   success?: boolean;
-  
+
   @ApiProperty({
     example: 1,
     description: "Identificador de verificación de la operación",
@@ -43,7 +49,7 @@ export class VerifyTaggingDto {
   @IsOptional()
   @IsStringOrNumber()
   verified?: string | number;
-  
+
   @ApiProperty({
     example: "6a736e10cde3a6e6116fd910",
     description: "Identificador de la operación",
@@ -55,13 +61,13 @@ export class VerifyTaggingDto {
 
   @ApiProperty({
     example: {
-      "sessionIdGT": "1785533276",
-      "clientIdGT": "1462492111.1785533277",
-      "campaign": {
-          "source": "google",
-          "medium": "cpc",
-          "name": "brandterms_general"
-      }
+      sessionIdGT: "1785533276",
+      clientIdGT: "1462492111.1785533277",
+      campaign: {
+        source: "google",
+        medium: "cpc",
+        name: "brandterms_general",
+      },
     },
     description: "Información de la extra de Google Tag Manager y campaña",
     required: false,

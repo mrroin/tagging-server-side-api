@@ -1,5 +1,10 @@
 import { ApiProperty, ApiSchema } from "@nestjs/swagger";
-import { IsNumber, IsObject, IsOptional, IsString, ValidateIf, ValidateNested } from "class-validator";
+import {
+  IsObject,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from "class-validator";
 import { Type } from "class-transformer";
 import { Optional } from "@nestjs/common";
 import { SingupExtraTaggingDto } from "./singup-extra-tagging.dto";
@@ -47,17 +52,18 @@ export class SingupTaggingDto {
 
   @ApiProperty({
     example: {
-        "sessionIdGT": "1785533276",
-        "clientIdGT": "1462492111.1785533277",
-        "registerMethod": "email",
-        "country": "MX",
-        "affiliate": "",
-        "campaign": {
-            "source": "google",
-            "medium": "cpc",
-            "name": "brandterms_general"
-        }
-  }})
+      sessionIdGT: "1785533276",
+      clientIdGT: "1462492111.1785533277",
+      registerMethod: "email",
+      country: "MX",
+      affiliate: "",
+      campaign: {
+        source: "google",
+        medium: "cpc",
+        name: "brandterms_general",
+      },
+    },
+  })
   @Type(() => SingupExtraTaggingDto)
   @IsObject()
   @ValidateNested()

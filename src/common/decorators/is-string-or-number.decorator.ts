@@ -2,7 +2,7 @@ import {
   registerDecorator,
   ValidationOptions,
   ValidationArguments,
-} from 'class-validator';
+} from "class-validator";
 
 /**
  * Decorador personalizado que valida si un valor es string o number
@@ -11,14 +11,14 @@ import {
 export function IsStringOrNumber(validationOptions?: ValidationOptions) {
   return function (object: object, propertyName: string) {
     registerDecorator({
-      name: 'isStringOrNumber',
+      name: "isStringOrNumber",
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
       validator: {
         validate(value: any, args: ValidationArguments) {
           // Retorna true si es string o number
-          return typeof value === 'string' || typeof value === 'number';
+          return typeof value === "string" || typeof value === "number";
         },
         defaultMessage(args: ValidationArguments) {
           // Mensaje de error personalizado

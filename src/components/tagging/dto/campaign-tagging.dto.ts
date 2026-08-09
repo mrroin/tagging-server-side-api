@@ -2,8 +2,7 @@ import { ApiProperty, ApiSchema } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
 
 @ApiSchema({
-  description:
-    "Información de la campaña",
+  description: "Información de la campaña",
 })
 export class CampaignTaggingDto {
   @ApiProperty({

@@ -1,6 +1,13 @@
-import { Controller, Post, Body, HttpCode, UsePipes, ValidationPipe } from "@nestjs/common";
+import {
+  Controller,
+  Post,
+  Body,
+  HttpCode,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common";
 import { TaggingService } from "./tagging.service";
-import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { TaggingResponseDto } from "./dto/tagging-response.dto";
 import { Throttle } from "@nestjs/throttler";
 import { ConfigService } from "@nestjs/config";
@@ -31,12 +38,15 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ login: {} })
-  @UsePipes(new ValidationPipe({
-    whitelist: true,              // Solo valida propiedades con decoradores
-    forbidNonWhitelisted: false,  // 👈 PERMITE propiedades extra como 'user2'
-    transform: true,              // Transforma a la clase DTO
-  }))
-  login(@Body() taggingDto: LoginTaggingDto) {
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: true, // Solo valida propiedades con decoradores
+      forbidNonWhitelisted: false, // 👈 PERMITE propiedades extra como 'user2'
+      transform: true, // Transforma a la clase DTO
+    })
+  )
+  @ApiBody({ type: LoginTaggingDto })
+  login(@Body() taggingDto: LoginTaggingDto | any) {
     return this.taggingService.login(taggingDto);
   }
 
@@ -54,7 +64,8 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ singup: {} })
-  singup(@Body() taggingDto: SingupTaggingDto) {
+  @ApiBody({ type: SingupTaggingDto })
+  singup(@Body() taggingDto: SingupTaggingDto | any) {
     return this.taggingService.singup(taggingDto);
   }
 
@@ -72,7 +83,8 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ "first-deposit": {} })
-  firstDeposit(@Body() taggingDto: DepositTaggingDto) {
+  @ApiBody({ type: DepositTaggingDto })
+  firstDeposit(@Body() taggingDto: DepositTaggingDto | any) {
     return this.taggingService.firstDeposit(taggingDto);
   }
 
@@ -90,7 +102,8 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ deposit: {} })
-  deposit(@Body() taggingDto: DepositTaggingDto) {
+  @ApiBody({ type: DepositTaggingDto })
+  deposit(@Body() taggingDto: DepositTaggingDto | any) {
     return this.taggingService.deposit(taggingDto);
   }
 
@@ -108,7 +121,8 @@ export class TaggingController {
     description: "ThrottlerException: Too Many Requests",
   })
   @Throttle({ general: {} })
-  verify(@Body() taggingDto: VerifyTaggingDto) {
+  @ApiBody({ type: VerifyTaggingDto })
+  verify(@Body() taggingDto: VerifyTaggingDto | any) {
     return this.taggingService.verify(taggingDto);
   }
 }

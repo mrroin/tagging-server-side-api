@@ -1,11 +1,15 @@
 import { ApiProperty, ApiSchema } from "@nestjs/swagger";
-import { IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
+import {
+  IsObject,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from "class-validator";
 import { CampaignTaggingDto } from "./campaign-tagging.dto";
 import { Type } from "class-transformer";
 
 @ApiSchema({
-  description:
-    "Información de la extra de Google Tag Manager y campaña",
+  description: "Información de la extra de Google Tag Manager y campaña",
 })
 export class ExtraTaggingDto {
   @ApiProperty({
@@ -28,9 +32,9 @@ export class ExtraTaggingDto {
 
   @ApiProperty({
     example: {
-      "source": "google",
-      "medium": "cpc",
-      "name": "brandterms_general"
+      source: "google",
+      medium: "cpc",
+      name: "brandterms_general",
     },
     description: "Información de la campaña",
     required: false,
