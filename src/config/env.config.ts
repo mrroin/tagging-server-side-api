@@ -19,4 +19,11 @@ export const EnvConfiguration = () => ({
   googleApiSecret: process.env.GOOGLE_API_SECRET,
   googleDebug: process.env.GOOGLE_DEBUG === "true" ? true : false,
   googleEngagementTime: parseInt(process.env.GOOGLE_ENGAGEMENT_TIME),
+
+  //META TAGGING
+  metaUrl: process.env.META_URL,
+  metaPixelId: process.env.META_PIXEL_ID,
+  metaPixelAccesToken: process.env.META_PIXEL_ACCESS_TOKEN,
+  metaPixelDebug: process.env.META_PIXEL_DEBUG === "true" ? true : false,
+  metaPixelTestEvent: process.env.META_PIXEL_TEST_EVENT,
 });

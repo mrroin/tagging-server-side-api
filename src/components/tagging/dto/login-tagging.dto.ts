@@ -1,9 +1,5 @@
 import { ApiProperty, ApiSchema } from "@nestjs/swagger";
-import {
-  IsObject,
-  IsOptional,
-  ValidateNested,
-} from "class-validator";
+import { IsObject, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 import { ExtraTaggingDto } from "./extra-tagging.dto";
 import { IsStringOrNumber } from "@common/decorators/is-string-or-number.decorator";

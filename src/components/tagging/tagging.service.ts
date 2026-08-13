@@ -31,8 +31,12 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
-      await this._TaggingManagerService.sendTagging(
+      const client_id = `${
+        jsonObject?.extra?.clientIdGT
+          ? jsonObject?.extra?.clientIdGT
+          : jsonObject?.user
+      }`;
+      await this._TaggingManagerService.sendTaggingGoogle(
         client_id,
         "api_login",
         {
@@ -65,32 +69,79 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user_id}`;
-      await this._TaggingManagerService.sendTagging(
-        client_id,
-        "api_singup",
-        {
-          user: jsonObject?.user_id,
-          session_id: jsonObject?.extra?.sessionIdGT,
-          company: jsonObject?.company,
-          alias: jsonObject?.alias,
-          email: jsonObject?.email,
+      const client_id = `${
+        jsonObject?.extra?.clientIdGT
+          ? jsonObject?.extra?.clientIdGT
+          : jsonObject?.user_id
+      }`;
+      try {
+        await this._TaggingManagerService.sendTaggingGoogle(
           client_id,
-          registerMethod: jsonObject?.extra?.registerMethod,
-          country: jsonObject?.extra?.country,
-          affiliate: jsonObject?.extra?.affiliate,
-          // extra: jsonObject?.extra,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
-        },
-        {
-          session_id: jsonObject?.extra?.sessionIdGT,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
+          "api_singup",
+          {
+            user: jsonObject?.user_id,
+            session_id: jsonObject?.extra?.sessionIdGT,
+            company: jsonObject?.company,
+            alias: jsonObject?.alias,
+            email: jsonObject?.email,
+            client_id,
+            registerMethod: jsonObject?.extra?.registerMethod,
+            country: jsonObject?.extra?.country,
+            affiliate: jsonObject?.extra?.affiliate,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          },
+          {
+            session_id: jsonObject?.extra?.sessionIdGT,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          }
+        );
+      } catch (error) {
+        this.logger.error("Error al enviar tagging google: ");
+        this.logger.error(error);
+      }
+      if (jsonObject?.email || jsonObject?.extra?.email) {
+        try {
+          await this._TaggingManagerService.sendTaggingMeta(
+            jsonObject?.user_id,
+            "api_singup",
+            {
+              user: jsonObject?.user_id,
+              company: jsonObject?.company,
+              alias: jsonObject?.alias,
+              registerMethod: jsonObject?.extra?.registerMethod,
+              country: jsonObject?.extra?.country,
+              affiliate: jsonObject?.extra?.affiliate,
+
+              actionSource: "website",
+              eventName: "CompleteRegistration",
+
+              eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
+              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientUserAgent: jsonObject?.extra?.clientUserAgent,
+              email: jsonObject?.email || jsonObject?.extra?.email,
+              phone: jsonObject?.extra?.phone,
+              eventId: jsonObject?.extra?.eventId,
+              fbp: jsonObject?.extra?.fbp,
+
+            	value: 0.1,
+				      currency: "MXN",
+            },
+            {
+              //for meta
+              utm_source: jsonObject?.extra?.campaign?.source,
+              utm_medium: jsonObject?.extra?.campaign?.medium,
+              utm_campaign: jsonObject?.extra?.campaign?.name,
+            }
+          );
+        } catch (error) {
+          this.logger.error("Error al enviar tagging meta: ");
+          this.logger.error(error);
         }
-      );
+      }
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para singup"
       );
@@ -108,29 +159,73 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
-      await this._TaggingManagerService.sendTagging(
-        client_id,
-        "api_vivento_ftd",
-        {
-          value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
-          transaction_id: jsonObject?.operation,
-          currency: jsonObject?.currency,
-          user: jsonObject?.user,
-          session_id: jsonObject?.extra?.sessionIdGT,
+      const client_id = `${
+        jsonObject?.extra?.clientIdGT
+          ? jsonObject?.extra?.clientIdGT
+          : jsonObject?.user
+      }`;
+      try {
+        await this._TaggingManagerService.sendTaggingGoogle(
           client_id,
-          // extra: jsonObject?.extra,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
-        },
-        {
-          session_id: jsonObject?.extra?.sessionIdGT,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
+          "api_vivento_ftd",
+          {
+            value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+            transaction_id: jsonObject?.operation,
+            currency: jsonObject?.currency,
+            user: jsonObject?.user,
+            session_id: jsonObject?.extra?.sessionIdGT,
+            client_id,
+            // extra: jsonObject?.extra,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          },
+          {
+            session_id: jsonObject?.extra?.sessionIdGT,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          }
+        );
+      } catch (error) {
+        this.logger.error("Error al enviar tagging google: ");
+        this.logger.error(error);
+      }
+      if (jsonObject?.email || jsonObject?.extra?.email) {
+        try {
+          await this._TaggingManagerService.sendTaggingMeta(
+            jsonObject?.user,
+            "api_vivento_ftd",
+            {
+              user: jsonObject?.user,
+              value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+              transaction_id: jsonObject?.operation,
+              currency: jsonObject?.currency,
+              isFirtsDeposit: true,
+
+              actionSource: "website",
+              eventName: "Purchase",
+
+              eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
+              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientUserAgent: jsonObject?.extra?.clientUserAgent,
+              email: jsonObject?.email || jsonObject?.extra?.email,
+              phone: jsonObject?.extra?.phone,
+              eventId: jsonObject?.extra?.eventId,
+              fbp: jsonObject?.extra?.fbp,
+            },
+            {
+              //for meta
+              utm_source: jsonObject?.extra?.campaign?.source,
+              utm_medium: jsonObject?.extra?.campaign?.medium,
+              utm_campaign: jsonObject?.extra?.campaign?.name,
+            }
+          );
+        } catch (error) {
+          this.logger.error("Error al enviar tagging meta: ");
+          this.logger.error(error);
         }
-      );
+      }
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para first firstDeposit"
       );
@@ -148,29 +243,72 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
-      await this._TaggingManagerService.sendTagging(
-        client_id,
-        "api_vivento_redeposit",
-        {
-          value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
-          transaction_id: jsonObject?.operation,
-          currency: jsonObject?.currency,
-          user: jsonObject?.user,
-          session_id: jsonObject?.extra?.sessionIdGT,
+      const client_id = `${
+        jsonObject?.extra?.clientIdGT
+          ? jsonObject?.extra?.clientIdGT
+          : jsonObject?.user
+      }`;
+      try {
+        await this._TaggingManagerService.sendTaggingGoogle(
           client_id,
-          // extra: jsonObject?.extra,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
-        },
-        {
-          session_id: jsonObject?.extra?.sessionIdGT,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
+          "api_vivento_redeposit",
+          {
+            value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+            transaction_id: jsonObject?.operation,
+            currency: jsonObject?.currency,
+            user: jsonObject?.user,
+            session_id: jsonObject?.extra?.sessionIdGT,
+            client_id,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          },
+          {
+            session_id: jsonObject?.extra?.sessionIdGT,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          }
+        );
+      } catch (error) {
+        this.logger.error("Error al enviar tagging google: ");
+        this.logger.error(error);
+      }
+      if (jsonObject?.email || jsonObject?.extra?.email) {
+        try {
+          await this._TaggingManagerService.sendTaggingMeta(
+            jsonObject?.user,
+            "api_vivento_ftd",
+            {
+              user: jsonObject?.user,
+              value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
+              transaction_id: jsonObject?.operation,
+              currency: jsonObject?.currency,
+              isFirtsDeposit: false,
+
+              actionSource: "website",
+              eventName: "Purchase",
+
+              eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
+              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientUserAgent: jsonObject?.extra?.clientUserAgent,
+              email: jsonObject?.email || jsonObject?.extra?.email,
+              phone: jsonObject?.extra?.phone,
+              eventId: jsonObject?.extra?.eventId,
+              fbp: jsonObject?.extra?.fbp,
+            },
+            {
+              //for meta
+              utm_source: jsonObject?.extra?.campaign?.source,
+              utm_medium: jsonObject?.extra?.campaign?.medium,
+              utm_campaign: jsonObject?.extra?.campaign?.name,
+            }
+          );
+        } catch (error) {
+          this.logger.error("Error al enviar tagging meta: ");
+          this.logger.error(error);
         }
-      );
+      }
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para deposit"
       );
@@ -188,31 +326,77 @@ export class TaggingService {
     );
     try {
       const jsonObject = instanceToPlain(taggingDto);
-      const client_id = `${jsonObject?.extra?.clientIdGT? jsonObject?.extra?.clientIdGT : jsonObject?.user}`;
-      await this._TaggingManagerService.sendTagging(
-        client_id,
-        "api_vivento_verify",
-        {
-          transaction_id: jsonObject?.operation,
-          verifyDate: new Date().toISOString(),
-          status: jsonObject?.status,
-          success: jsonObject?.success,
-          verified: jsonObject?.verified,
-          user: jsonObject?.user,
-          session_id: jsonObject?.extra?.sessionIdGT,
+      const client_id = `${
+        jsonObject?.extra?.clientIdGT
+          ? jsonObject?.extra?.clientIdGT
+          : jsonObject?.user
+      }`;
+      try {
+        await this._TaggingManagerService.sendTaggingGoogle(
           client_id,
-          // extra: jsonObject?.extra,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
-        },
-        {
-          session_id: jsonObject?.extra?.sessionIdGT,
-          source: jsonObject?.extra?.campaign?.source,
-          medium: jsonObject?.extra?.campaign?.medium,
-          campaign: jsonObject?.extra?.campaign?.name,
+          "api_vivento_verify",
+          {
+            transaction_id: jsonObject?.operation,
+            verifyDate: new Date().toISOString(),
+            status: jsonObject?.status,
+            success: jsonObject?.success,
+            verified: jsonObject?.verified,
+            user: jsonObject?.user,
+            session_id: jsonObject?.extra?.sessionIdGT,
+            client_id,
+            // extra: jsonObject?.extra,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          },
+          {
+            session_id: jsonObject?.extra?.sessionIdGT,
+            source: jsonObject?.extra?.campaign?.source,
+            medium: jsonObject?.extra?.campaign?.medium,
+            campaign: jsonObject?.extra?.campaign?.name,
+          }
+        );
+      } catch (error) {
+        this.logger.error("Error al enviar tagging google: ");
+        this.logger.error(error);
+      }
+      if (jsonObject?.email) {
+        try {
+          await this._TaggingManagerService.sendTaggingMeta(
+            jsonObject?.user_id,
+            "api_vivento_verify",
+            {
+              user: jsonObject?.user_id,
+              company: jsonObject?.company,
+              alias: jsonObject?.alias,
+              registerMethod: jsonObject?.extra?.registerMethod,
+              country: jsonObject?.extra?.country,
+              affiliate: jsonObject?.extra?.affiliate,
+
+              actionSource: "website",
+              eventName: "CompleteRegistration",
+
+              eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
+              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientUserAgent: jsonObject?.extra?.clientUserAgent,
+              email: jsonObject?.email || jsonObject?.extra?.email,
+              phone: jsonObject?.extra?.phone,
+              eventId: jsonObject?.extra?.eventId,
+              fbp: jsonObject?.extra?.fbp,
+
+            },
+            {
+              //for meta
+              utm_source: jsonObject?.extra?.campaign?.source,
+              utm_medium: jsonObject?.extra?.campaign?.medium,
+              utm_campaign: jsonObject?.extra?.campaign?.name,
+            }
+          );
+        } catch (error) {
+          this.logger.error("Error al enviar tagging meta: ");
+          this.logger.error(error);
         }
-      );
+      }
       return new TaggingResponseDto(
         "Este evento agrego un nuevo tagging para verify"
       );

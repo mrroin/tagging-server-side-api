@@ -23,4 +23,11 @@ export const JoiValidationSchema = Joi.object({
   googleApiSecret: Joi.string(),
   googleDebug: Joi.boolean().default(false),
   googleEngagementTime: Joi.number().default(1000),
+
+  //META TAGGING
+  metaUrl: Joi.string(),
+  metaPixelId: Joi.string(),
+  metaPixelAccesToken: Joi.string(),
+  metaPixelDebug: Joi.boolean().default(false),
+  metaPixelTestEvent: Joi.string().default(""),
 });

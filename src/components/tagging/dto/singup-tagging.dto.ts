@@ -62,6 +62,12 @@ export class SingupTaggingDto {
         medium: "cpc",
         name: "brandterms_general",
       },
+      eventSourceUrl: "https://site.com",
+      clientIpAddress: "192.168.1.1",
+      clientUserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      email: "mail@site.com",
+      phone: "5536238933",
+      eventId: "uuidforfrontend0001",
     },
   })
   @Type(() => SingupExtraTaggingDto)
