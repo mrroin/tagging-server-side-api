@@ -26,6 +26,7 @@ export const JoiValidationSchema = Joi.object({
 
   //META TAGGING
   metaUrl: Joi.string(),
+  metaOn: Joi.boolean().default(false),
   metaPixelId: Joi.string(),
   metaPixelAccesToken: Joi.string(),
   metaPixelDebug: Joi.boolean().default(false),

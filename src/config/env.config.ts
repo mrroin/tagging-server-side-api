@@ -22,6 +22,7 @@ export const EnvConfiguration = () => ({
 
   //META TAGGING
   metaUrl: process.env.META_URL,
+  metaOn: process.env.META_PIXEL_ON === "true" ? true : false,
   metaPixelId: process.env.META_PIXEL_ID,
   metaPixelAccesToken: process.env.META_PIXEL_ACCESS_TOKEN,
   metaPixelDebug: process.env.META_PIXEL_DEBUG === "true" ? true : false,

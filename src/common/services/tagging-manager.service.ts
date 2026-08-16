@@ -7,6 +7,7 @@ import * as crypto from "crypto";
 export class TaggingManagerService {
   googleUrl: string;
   metaUrl: string;
+  metaOn: boolean;
   private readonly logger = new Logger(
     `management-api ${TaggingManagerService.name}`
   );
@@ -14,6 +15,7 @@ export class TaggingManagerService {
     private readonly _configService: ConfigService,
     private readonly _httpAdapterService: HttpAdapterService
   ) {
+    this.metaOn = this._configService.get("metaOn");
     this.googleUrl = `${this._configService.get(
       "googleUrl"
     )}?measurement_id=${this._configService.get(
@@ -86,6 +88,13 @@ export class TaggingManagerService {
     eventParams: any,
     utmParams: any
   ) {
+    if(!this.metaOn){
+      this.logger.log("No send to Meta, metaOn is false");
+      return {
+        success: false,
+        message: "No send to Meta, metaOn is false",
+      };
+    }
     try {
       this.logger.log("metaUrl");
       this.logger.log(this.metaUrl);
