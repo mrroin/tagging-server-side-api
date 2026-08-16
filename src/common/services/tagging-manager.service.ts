@@ -88,13 +88,6 @@ export class TaggingManagerService {
     eventParams: any,
     utmParams: any
   ) {
-    if(!this.metaOn){
-      this.logger.log("No send to Meta, metaOn is false");
-      return {
-        success: false,
-        message: "No send to Meta, metaOn is false",
-      };
-    }
     try {
       this.logger.log("metaUrl");
       this.logger.log(this.metaUrl);
@@ -154,6 +147,16 @@ export class TaggingManagerService {
       };
       this.logger.log("sendTagging meta => payload: ");
       this.logger.log(payload);
+
+      if (!this.metaOn) {
+        this.logger.log("Last payload wasn't send");
+        this.logger.log("<?> Here!");
+        this.logger.log("No send to Meta, metaOn is false");
+        return {
+          success: false,
+          message: "No send to Meta, metaOn is false",
+        };
+      }
       const data = await this._httpAdapterService.post(this.metaUrl, payload);
       return {
         success: true,
