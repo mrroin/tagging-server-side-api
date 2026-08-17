@@ -117,7 +117,7 @@ export class TaggingService {
               affiliate: jsonObject?.extra?.affiliate,
 
               actionSource: "website",
-              eventName: "CompleteRegistration",
+              eventName: "api_singup",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
               clientIpAddress: jsonObject?.extra?.clientIpAddress,
@@ -204,7 +204,7 @@ export class TaggingService {
               isFirtsDeposit: true,
 
               actionSource: "website",
-              eventName: "Purchase",
+              eventName: "api_vivento_ftd",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
               clientIpAddress: jsonObject?.extra?.clientIpAddress,
@@ -278,7 +278,7 @@ export class TaggingService {
         try {
           await this._TaggingManagerService.sendTaggingMeta(
             jsonObject?.user,
-            "api_vivento_ftd",
+            "api_vivento_redeposit",
             {
               user: jsonObject?.user,
               value: (parseInt(jsonObject?.amount, 10) / 100).toFixed(2),
@@ -287,7 +287,7 @@ export class TaggingService {
               isFirtsDeposit: false,
 
               actionSource: "website",
-              eventName: "Purchase",
+              eventName: "api_vivento_redeposit",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
               clientIpAddress: jsonObject?.extra?.clientIpAddress,
@@ -374,7 +374,7 @@ export class TaggingService {
               affiliate: jsonObject?.extra?.affiliate,
 
               actionSource: "website",
-              eventName: "CompleteRegistration",
+              eventName: "api_vivento_verify",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
               clientIpAddress: jsonObject?.extra?.clientIpAddress,
