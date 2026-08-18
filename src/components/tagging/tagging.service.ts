@@ -120,7 +120,7 @@ export class TaggingService {
               eventName: "api_singup",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
-              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientIpAddress: jsonObject?.ip,
               clientUserAgent: jsonObject?.extra?.clientUserAgent,
               email: jsonObject?.email || jsonObject?.extra?.email,
               phone: jsonObject?.extra?.phone,
@@ -207,7 +207,7 @@ export class TaggingService {
               eventName: "api_vivento_ftd",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
-              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientIpAddress: jsonObject?.ip,
               clientUserAgent: jsonObject?.extra?.clientUserAgent,
               email: jsonObject?.email || jsonObject?.extra?.email,
               phone: jsonObject?.extra?.phone,
@@ -290,10 +290,10 @@ export class TaggingService {
               eventName: "api_vivento_redeposit",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
-              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientIpAddress: jsonObject?.ip,
               clientUserAgent: jsonObject?.extra?.clientUserAgent,
               email: jsonObject?.email || jsonObject?.extra?.email,
-              phone: jsonObject?.extra?.phone,
+              phone: jsonObject?.mobile || jsonObject?.extra?.phone,
               eventId: jsonObject?.extra?.eventId,
               fbp: jsonObject?.extra?.fbp,
             },
@@ -377,10 +377,10 @@ export class TaggingService {
               eventName: "api_vivento_verify",
 
               eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
-              clientIpAddress: jsonObject?.extra?.clientIpAddress,
+              clientIpAddress: jsonObject?.ip,
               clientUserAgent: jsonObject?.extra?.clientUserAgent,
               email: jsonObject?.email || jsonObject?.extra?.email,
-              phone: jsonObject?.extra?.phone,
+              phone: jsonObject?.mobile || jsonObject?.extra?.phone,
               eventId: jsonObject?.extra?.eventId,
               fbp: jsonObject?.extra?.fbp,
             },
