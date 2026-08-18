@@ -331,6 +331,12 @@ export class TaggingService {
           ? jsonObject?.extra?.clientIdGT
           : jsonObject?.user
       }`;
+      let extra = jsonObject?.extra;
+      try {
+        extra = JSON.parse(jsonObject?.extra);
+      } catch (error) {
+        
+      }
       try {
         await this._TaggingManagerService.sendTaggingGoogle(
           client_id,
@@ -342,18 +348,18 @@ export class TaggingService {
             success: jsonObject?.success,
             verified: jsonObject?.verified,
             user: jsonObject?.user,
-            session_id: jsonObject?.extra?.sessionIdGT,
+            session_id: extra?.sessionIdGT,
             client_id,
-            // extra: jsonObject?.extra,
-            source: jsonObject?.extra?.campaign?.source,
-            medium: jsonObject?.extra?.campaign?.medium,
-            campaign: jsonObject?.extra?.campaign?.name,
+            // extra: extra,
+            source: extra?.campaign?.source,
+            medium: extra?.campaign?.medium,
+            campaign: extra?.campaign?.name,
           },
           {
-            session_id: jsonObject?.extra?.sessionIdGT,
-            source: jsonObject?.extra?.campaign?.source,
-            medium: jsonObject?.extra?.campaign?.medium,
-            campaign: jsonObject?.extra?.campaign?.name,
+            session_id: extra?.sessionIdGT,
+            source: extra?.campaign?.source,
+            medium: extra?.campaign?.medium,
+            campaign: extra?.campaign?.name,
           }
         );
       } catch (error) {
@@ -369,26 +375,26 @@ export class TaggingService {
               user: jsonObject?.user_id,
               company: jsonObject?.company,
               alias: jsonObject?.alias,
-              registerMethod: jsonObject?.extra?.registerMethod,
-              country: jsonObject?.extra?.country,
-              affiliate: jsonObject?.extra?.affiliate,
+              registerMethod: extra?.registerMethod,
+              country: extra?.country,
+              affiliate: extra?.affiliate,
 
               actionSource: "website",
               eventName: "api_vivento_verify",
 
-              eventSourceUrl: jsonObject?.extra?.eventSourceUrl,
+              eventSourceUrl: extra?.eventSourceUrl,
               clientIpAddress: jsonObject?.ip,
-              clientUserAgent: jsonObject?.extra?.clientUserAgent,
-              email: jsonObject?.email || jsonObject?.extra?.email,
-              phone: jsonObject?.mobile || jsonObject?.extra?.phone,
-              eventId: jsonObject?.extra?.eventId,
-              fbp: jsonObject?.extra?.fbp,
+              clientUserAgent: extra?.clientUserAgent,
+              email: jsonObject?.email || extra?.email,
+              phone: jsonObject?.mobile || extra?.phone,
+              eventId: extra?.eventId,
+              fbp: extra?.fbp,
             },
             {
               //for meta
-              utm_source: jsonObject?.extra?.campaign?.source,
-              utm_medium: jsonObject?.extra?.campaign?.medium,
-              utm_campaign: jsonObject?.extra?.campaign?.name,
+              utm_source: extra?.campaign?.source,
+              utm_medium: extra?.campaign?.medium,
+              utm_campaign: extra?.campaign?.name,
             }
           );
         } catch (error) {

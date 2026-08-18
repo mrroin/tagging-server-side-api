@@ -36,7 +36,7 @@ async function bootstrap() {
   await app.listen(`${process.env.PORT}`, "0.0.0.0");
   console.log(
     "🚀 Server listen in: ",
-    `${process.env.PORT}, version 0.0.1 170826 22:13`
+    `${process.env.PORT}, version 0.0.1 180826 12:01`
   );
 }
 bootstrap();
