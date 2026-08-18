@@ -9,6 +9,7 @@ async function bootstrap() {
   app.setGlobalPrefix(`${process.env.GLOBAL_PREFIX}`);
   app.enableVersioning({
     type: VersioningType.URI,
+    defaultVersion: '1',
   });
   app.enableCors();
   app.useGlobalPipes(
@@ -36,7 +37,7 @@ async function bootstrap() {
   await app.listen(`${process.env.PORT}`, "0.0.0.0");
   console.log(
     "🚀 Server listen in: ",
-    `${process.env.PORT}, version 0.0.1 180826 12:01`
+    `${process.env.PORT}, version 0.0.1 180826 18:56`
   );
 }
 bootstrap();
