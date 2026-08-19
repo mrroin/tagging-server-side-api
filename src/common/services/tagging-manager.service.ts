@@ -105,6 +105,8 @@ export class TaggingManagerService {
       delete eventParams?.eventId;
       const fbp = eventParams?.fbp;
       delete eventParams?.fbp;
+      const fbc = eventParams?.fbc;
+      delete eventParams?.fbc;
       const em = [];
       const ph = [];
       if (eventParams?.email) {
@@ -121,13 +123,14 @@ export class TaggingManagerService {
         event_name,
         event_source_url,
         action_source,
-        fbp,
         user_data: {
           em: em,
           ph: ph,
           external_id: clientId,
           client_ip_address,
           client_user_agent,
+          fbp,
+          fbc,
         },
         custom_data: {
           ...eventParams,
