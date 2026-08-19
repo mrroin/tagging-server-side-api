@@ -33,7 +33,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, configBuilder, {
     include: [TaggingModule],
   });
-  SwaggerModule.setup(`${process.env.GLOBAL_PREFIX}`, app, document);
+  SwaggerModule.setup(`${process.env.GLOBAL_PREFIX}/v1`, app, document);
   await app.listen(`${process.env.PORT}`, "0.0.0.0");
   console.log(
     "🚀 Server listen in: ",
