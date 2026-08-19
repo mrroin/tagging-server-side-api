@@ -126,6 +126,7 @@ export class TaggingService {
               phone: jsonObject?.extra?.phone,
               eventId: jsonObject?.extra?.eventId,
               fbp: jsonObject?.extra?.fbp,
+              fbc: jsonObject?.extra?.fbc,
 
               value: 0.1,
               currency: "MXN",
@@ -213,6 +214,7 @@ export class TaggingService {
               phone: jsonObject?.extra?.phone,
               eventId: jsonObject?.extra?.eventId,
               fbp: jsonObject?.extra?.fbp,
+              fbc: jsonObject?.extra?.fbc,
             },
             {
               //for meta
@@ -296,6 +298,7 @@ export class TaggingService {
               phone: jsonObject?.mobile || jsonObject?.extra?.phone,
               eventId: jsonObject?.extra?.eventId,
               fbp: jsonObject?.extra?.fbp,
+              fbc: jsonObject?.extra?.fbc,
             },
             {
               //for meta
