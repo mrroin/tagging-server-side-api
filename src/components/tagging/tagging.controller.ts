@@ -24,31 +24,31 @@ export class TaggingController {
     private readonly _configService: ConfigService
   ) {}
 
-  @Post("login")
-  @HttpCode(200)
-  @ApiResponse({
-    status: 200,
-    description: "La solicitud fue procesada",
-    type: TaggingResponseDto,
-  })
-  @ApiResponse({ status: 500, description: "Error al procesar la solicitud" })
-  @ApiResponse({ status: 400, description: "Bad request" })
-  @ApiResponse({
-    status: 429,
-    description: "ThrottlerException: Too Many Requests",
-  })
-  @Throttle({ login: {} })
-  @UsePipes(
-    new ValidationPipe({
-      whitelist: true, // Solo valida propiedades con decoradores
-      forbidNonWhitelisted: false, // 👈 PERMITE propiedades extra como 'user2'
-      transform: true, // Transforma a la clase DTO
-    })
-  )
-  @ApiBody({ type: LoginTaggingDto })
-  login(@Body() taggingDto: LoginTaggingDto | any) {
-    return this.taggingService.login(taggingDto);
-  }
+  // @Post("login")
+  // @HttpCode(200)
+  // @ApiResponse({
+  //   status: 200,
+  //   description: "La solicitud fue procesada",
+  //   type: TaggingResponseDto,
+  // })
+  // @ApiResponse({ status: 500, description: "Error al procesar la solicitud" })
+  // @ApiResponse({ status: 400, description: "Bad request" })
+  // @ApiResponse({
+  //   status: 429,
+  //   description: "ThrottlerException: Too Many Requests",
+  // })
+  // @Throttle({ login: {} })
+  // @UsePipes(
+  //   new ValidationPipe({
+  //     whitelist: true, // Solo valida propiedades con decoradores
+  //     forbidNonWhitelisted: false, // 👈 PERMITE propiedades extra como 'user2'
+  //     transform: true, // Transforma a la clase DTO
+  //   })
+  // )
+  // @ApiBody({ type: LoginTaggingDto })
+  // login(@Body() taggingDto: LoginTaggingDto | any) {
+  //   return this.taggingService.login(taggingDto);
+  // }
 
   @Post("singup")
   @HttpCode(200)
