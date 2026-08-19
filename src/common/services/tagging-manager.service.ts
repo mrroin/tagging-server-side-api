@@ -100,7 +100,7 @@ export class TaggingManagerService {
       const client_ip_address = eventParams?.clientIpAddress;
       delete eventParams?.clientIpAddress;
       const client_user_agent = eventParams?.clientUserAgent;
-      delete eventParams?.clientUserAgentN;
+      delete eventParams?.clientUserAgent;
       const event_id = eventParams?.eventId;
       delete eventParams?.eventId;
       const fbp = eventParams?.fbp;
