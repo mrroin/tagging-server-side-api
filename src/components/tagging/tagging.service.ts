@@ -337,9 +337,7 @@ export class TaggingService {
       let extra = jsonObject?.extra;
       try {
         extra = JSON.parse(jsonObject?.extra);
-      } catch (error) {
-        
-      }
+      } catch (error) {}
       try {
         await this._TaggingManagerService.sendTaggingGoogle(
           client_id,

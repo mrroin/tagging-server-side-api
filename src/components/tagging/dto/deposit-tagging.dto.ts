@@ -8,6 +8,7 @@ import {
 import { Type } from "class-transformer";
 import { ExtraTaggingDto } from "./extra-tagging.dto";
 import { IsStringOrNumber } from "@common/decorators/is-string-or-number.decorator";
+import { Optional } from "@nestjs/common";
 
 @ApiSchema({
   description:
@@ -48,6 +49,33 @@ export class DepositTaggingDto {
   @IsString()
   @IsOptional()
   currency?: string;
+
+  @ApiProperty({
+    example: "viventodev26@mail.com",
+    description: "Correo electrónico del usuario que realiza la operación",
+    required: false,
+  })
+  @Optional()
+  @IsString()
+  email?: string;
+
+  @ApiProperty({
+    example: "34.198.101.115",
+    description: "Ip del usuario que hace la petición",
+    required: false,
+  })
+  @Optional()
+  @IsString()
+  ip?: string;
+
+  @ApiProperty({
+    example: "525511201001",
+    description: "Número de teléfono del usuario que hace la petición",
+    required: false,
+  })
+  @Optional()
+  @IsString()
+  mobile?: string;
 
   @ApiProperty({
     example: {
