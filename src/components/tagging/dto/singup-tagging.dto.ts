@@ -51,6 +51,24 @@ export class SingupTaggingDto {
   email?: string;
 
   @ApiProperty({
+    example: "34.198.101.115",
+    description: "Ip del usuario que hace la petición",
+    required: false,
+  })
+  @Optional()
+  @IsString()
+  ip?: string;
+
+  @ApiProperty({
+    example: "525511201001",
+    description: "Número de teléfono del usuario que hace la petición",
+    required: false,
+  })
+  @Optional()
+  @IsString()
+  mobile?: string;
+
+  @ApiProperty({
     example: {
       sessionIdGT: "1785533276",
       clientIdGT: "1462492111.1785533277",
